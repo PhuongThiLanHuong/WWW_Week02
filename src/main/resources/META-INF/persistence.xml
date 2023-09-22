@@ -5,6 +5,14 @@
              version="3.0">
     <persistence-unit name="week02">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>vn.edu.iuh.fit.week02.models.Customer</class>
+        <class>vn.edu.iuh.fit.week02.models.Employee</class>
+        <class>vn.edu.iuh.fit.week02.models.Order</class>
+        <class>vn.edu.iuh.fit.week02.models.OrderDetail</class>
+        <class>vn.edu.iuh.fit.week02.models.Product</class>
+        <class>vn.edu.iuh.fit.week02.models.ProductImage</class>
+        <class>vn.edu.iuh.fit.week02.models.ProductPrice</class>
+
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
