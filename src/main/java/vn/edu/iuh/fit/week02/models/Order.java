@@ -1,5 +1,6 @@
 package vn.edu.iuh.fit.week02.models;
 
+import jakarta.json.bind.annotation.JsonbDateFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -7,53 +8,42 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "order")
-public class Order implements Serializable {
+@Table(name="Orders")
+public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
-    private long orderId;
-
-    @Column(name = "order_date", nullable = false)
+    @Column(name="OrderID")
+    private long order_id;
+    @Column(name="OrderDate")
+    @JsonbDateFormat(value = "yyyy-MM-dd")
     private LocalDateTime orderDate;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
+    @JoinColumn(name="EmployeeID")
     private Employee employee;
-
     @ManyToOne
-    @JoinColumn(name = "cust_id", referencedColumnName = "cust_id")
+    @JoinColumn(name="CustomerID")
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    @JoinColumn
-    private List<OrderDetail> orderDetails;
-
     public Order() {
-
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderId=" + orderId +
-                ", orderDate=" + orderDate +
-                ", employee=" + employee +
-                ", customer=" + customer +
-                ", orderDetails=" + orderDetails +
-                '}';
+    public Order(long order_id) {
+        this.order_id = order_id;
     }
 
-    public Long getOrderId() {
-        return orderId;
+    public Order(long order_id, LocalDateTime orderDate, Employee employee, Customer customer) {
+        this.order_id = order_id;
+        this.orderDate = orderDate;
+        this.employee = employee;
+        this.customer = customer;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public long getOrder_id() {
+        return order_id;
     }
 
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
+    public void setOrder_id(long order_id) {
+        this.order_id = order_id;
     }
 
     public LocalDateTime getOrderDate() {
@@ -80,19 +70,13 @@ public class Order implements Serializable {
         this.customer = customer;
     }
 
-    public List<OrderDetail> getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(List<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
-    }
-
-    public Order(Long orderId, LocalDateTime orderDate, Employee employee, Customer customer, List<OrderDetail> orderDetails) {
-        this.orderId = orderId;
-        this.orderDate = orderDate;
-        this.employee = employee;
-        this.customer = customer;
-        this.orderDetails = orderDetails;
+    @Override
+    public String toString() {
+        return "Order{" +
+                "order_id=" + order_id +
+                ", orderDate=" + orderDate +
+                ", employee=" + employee +
+                ", customer=" + customer +
+                '}';
     }
 }

@@ -17,11 +17,10 @@ public class Employee implements Serializable {
     private Long emp_id;
 
     @Column(name = "full_name", nullable = false)
-    @JsonbDateFormat(value = "yyyy-MM-dd")
     private String full_name;
 
     @Column(name = "dob", nullable = false)
-
+    @JsonbDateFormat(value = "yyyy-MM-dd")
     private LocalDate dob;
 
     @Column(name = "email", length = 150, unique = true)

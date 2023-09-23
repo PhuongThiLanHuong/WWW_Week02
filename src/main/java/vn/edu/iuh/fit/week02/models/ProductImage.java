@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class ProductImage implements Serializable {
         @Id
         @ManyToOne
-        @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+        @JoinColumn(name = "ProductID", referencedColumnName = "ProductID")
         private Product product;
 
         @Id

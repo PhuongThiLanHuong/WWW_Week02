@@ -16,7 +16,7 @@ public class OrderDetail implements Serializable{
     private double quantity;
     @Id
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "OrderID", nullable = false)
     private Order order;
     @Id
     @ManyToOne
