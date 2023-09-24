@@ -46,8 +46,8 @@ public class EmployeeRepository {
             throw new RuntimeException(e);
         }
     }
-    public Optional<Employee> findbyId(String id) {
-        TypedQuery<Employee> query = em.createQuery("select e from Employee e where e.emp_id=:id", Employee.class);
+    public Optional<Employee> findbyId(Long id) {
+        TypedQuery<Employee> query = em.createQuery("select e from employee e where e.emp_id=:id", Employee.class);
         query.setParameter("id", id);
         Employee emp = query.getSingleResult();
         return emp == null ? Optional.empty() : Optional.of(emp);

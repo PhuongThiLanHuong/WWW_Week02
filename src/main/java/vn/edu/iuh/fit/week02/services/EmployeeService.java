@@ -15,11 +15,11 @@ public class EmployeeService {
     public void insertEmp(Employee employee) {
         repository.createEmployee(employee);
     }
-    public Optional<Employee> findById(String id) {
+    public Optional<Employee> findById(Long id) {
         return repository.findbyId(id);
     }
 
-    public boolean activeEmp(String id) {
+    public boolean activeEmp(Long id) {
         Optional<Employee> op = findById(id);
         if (op.isPresent()) {
             Employee employee = op.get();
