@@ -12,24 +12,5 @@ public class EmployeeService {
     public EmployeeService() {
         repository = new EmployeeRepository();
     }
-    public void insertEmp(Employee employee) {
-        repository.createEmployee(employee);
-    }
-    public Optional<Employee> findById(Long id) {
-        return repository.findbyId(id);
-    }
 
-    public boolean activeEmp(Long id) {
-        Optional<Employee> op = findById(id);
-        if (op.isPresent()) {
-            Employee employee = op.get();
-            employee.setStatus(EmployeeStatus.ACTIVE);
-            return true;
-        }
-        return false;
-    }
-
-    public List<Employee> getAll() {
-        return null;
-    }
 }

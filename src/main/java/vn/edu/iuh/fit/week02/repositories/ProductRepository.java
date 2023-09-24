@@ -1,31 +1,30 @@
 package vn.edu.iuh.fit.week02.repositories;
 
-import jakarta.persistence.*;
-import vn.edu.iuh.fit.week02.enums.EmployeeStatus;
-import vn.edu.iuh.fit.week02.models.Employee;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
+import vn.edu.iuh.fit.week02.enums.ProductStatus;
+import vn.edu.iuh.fit.week02.models.Product;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
-
-public class EmployeeRepository {
+public class ProductRepository {
     private EntityManager em;
     private EntityTransaction tr;
     private Logger LoggerFactory;
-    private final Logger logger=LoggerFactory.getLogger(this.getClass().getName());
-    public EmployeeRepository()
+    public ProductRepository()
     {
         em= Persistence.createEntityManagerFactory("week02")
                 .createEntityManager();
         tr=em.getTransaction();
     }
-    public boolean add(Employee emp)
+    public boolean add(Product p)
     {
         tr=em.getTransaction();
         tr.begin();
         try {
-            em.persist(emp);
+            em.persist(p);
             tr.commit();
             return true;
         } catch (Exception e) {
@@ -34,12 +33,12 @@ public class EmployeeRepository {
         }
         return false;
     }
-    public boolean update(Employee emp )
+    public boolean update(Product p )
     {
         tr=em.getTransaction();
         tr.begin();
         try {
-            em.merge(emp);
+            em.merge(p);
             tr.commit();
             return true;
         } catch (Exception e) {
@@ -48,24 +47,24 @@ public class EmployeeRepository {
         }
         return false;
     }
-    public Employee get(long id)
+    public Product get(long id)
     {
-       tr=em.getTransaction();
+        tr=em.getTransaction();
         tr.begin();
         try {
-            return em.find(Employee.class,id);
+            return em.find(Product.class,id);
         } catch (Exception e) {
             e.printStackTrace();
             tr.rollback();
         }
         return null;
     }
-    public List<Employee> getAll()
+    public List<Product> getAll()
     {
         tr=em.getTransaction();
         tr.begin();
         try {
-            return em.createQuery("select c from Employee c", Employee.class).getResultList();
+            return em.createQuery("select p from Product p", Product.class).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
             tr.rollback();
@@ -78,9 +77,9 @@ public class EmployeeRepository {
         tr.begin();
 
         try {
-            Employee emp=em.find(Employee.class,id);
-            emp.setStatus(EmployeeStatus.TERMINATED);
-            em.merge(emp);;
+            Product p=em.find(Product.class,id);
+            p.setStatus(ProductStatus.IN_ACTIVE);
+            em.merge(p);;
             tr.commit();
             return true;
         } catch (Exception e) {
@@ -89,15 +88,15 @@ public class EmployeeRepository {
         }
         return false;
     }
-    public boolean activeEmp(long id)
+    public boolean activeProduct(long id)
     {
-        EntityTransaction tr=em.getTransaction();
+        tr=em.getTransaction();
         tr.begin();
 
         try {
-            Employee emp=em.find(Employee.class,id);
-            emp.setStatus(EmployeeStatus.ACTIVE);
-            em.merge(emp);;
+            Product p=em.find(Product.class,id);
+            p.setStatus(ProductStatus.ACTIVE);
+            em.merge(p);;
             tr.commit();
             return true;
         } catch (Exception e) {
@@ -106,5 +105,6 @@ public class EmployeeRepository {
         }
         return false;
     }
+
 
 }
