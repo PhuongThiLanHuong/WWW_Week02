@@ -84,4 +84,10 @@ public class Customer implements Serializable {
         this.phone = phone;
         this.address = address;
     }
+    public Customer(String custName, String email, String phone, String address) {
+        this.custName = custName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
 }

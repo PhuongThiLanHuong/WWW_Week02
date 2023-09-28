@@ -135,4 +135,12 @@ public class Employee implements Serializable {
         this.status = status;
         this.listOrder = listOrder;
     }
+    public Employee( String full_name, LocalDate dob, String email, String phone, String address, EmployeeStatus status) {
+        this.full_name = full_name;
+        this.dob = dob;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.status = status;
+    }
 }

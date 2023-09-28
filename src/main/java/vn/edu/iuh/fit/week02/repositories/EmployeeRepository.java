@@ -65,7 +65,8 @@ public class EmployeeRepository {
         tr=em.getTransaction();
         tr.begin();
         try {
-            return em.createQuery("select c from Employee c", Employee.class).getResultList();
+            return em.createQuery("select c from Employee c", Employee.class)
+                    .getResultList();
         } catch (Exception e) {
             e.printStackTrace();
             tr.rollback();
@@ -80,7 +81,7 @@ public class EmployeeRepository {
         try {
             Employee emp=em.find(Employee.class,id);
             emp.setStatus(EmployeeStatus.TERMINATED);
-            em.merge(emp);;
+            em.merge(emp);
             tr.commit();
             return true;
         } catch (Exception e) {

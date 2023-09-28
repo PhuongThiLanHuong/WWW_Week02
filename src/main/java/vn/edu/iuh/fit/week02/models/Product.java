@@ -30,6 +30,13 @@ public class Product implements Serializable {
         this.status = status;
         this.unit = unit;
     }
+    public Product( String description, String manufacturer, String name,ProductStatus status, String unit) {
+        this.description = description;
+        this.manufacturer = manufacturer;
+        this.name = name;
+        this.status = status;
+        this.unit = unit;
+    }
 
     public Product() {
     }
