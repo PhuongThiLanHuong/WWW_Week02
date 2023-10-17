@@ -28,4 +28,10 @@ public class ProductModel {
         request.setAttribute("pro_list",list);
         request.getRequestDispatcher("productList.jsp").forward(request,response);
     }
+    public void deleteProduct(HttpServletRequest req,HttpServletResponse rep) throws Exception
+    {
+        long id=Long.parseLong(req.getParameter("id"));
+        productService.activateProduct(id,ProductStatus.IN_ACTIVE);
+        rep.sendRedirect("productList.jsp");
+    }
 }

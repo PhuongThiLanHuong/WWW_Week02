@@ -31,7 +31,7 @@ public class ControlServlet extends HttpServlet {
                     ProductModel productModel=new ProductModel();
                     productModel.insertPro(req, resp);
                 }else{
-                    resp.sendRedirect("customerList");
+                    resp.sendRedirect("customerList.jsp");
                 }
             }
         }catch (Exception e)
@@ -57,7 +57,11 @@ public class ControlServlet extends HttpServlet {
                 }else if(action.equals("delete_emp")){
                     EmployeeModel employeeModel=new EmployeeModel();
                     employeeModel.delteEmp(req,resp);
-                }else {
+                }else if (action.equals("delete_product")){
+                    ProductModel pm=new ProductModel();
+                    pm.deleteProduct(req, resp);
+                }
+                else {
                     resp.sendRedirect("test.jsp");
                 }
             }

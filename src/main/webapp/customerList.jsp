@@ -43,6 +43,7 @@
         <td><%=customer.getAddress()%></td>
 
     </tr>
+    <%}%>
 </table>
 </body>
 </html>

@@ -31,8 +31,8 @@ public class ProductService {
         return productRepository.detele(id);
     }
 
-    public boolean activateProduct(long id) {
-        return productRepository.activeProduct(id);
+    public void activateProduct(long id,ProductStatus status) {
+        productRepository.updateStatus(id, status);
     }
 
 
