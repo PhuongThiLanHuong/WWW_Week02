@@ -28,8 +28,8 @@ public class ControlServlet extends HttpServlet {
                     CustomerModel customerModel=new CustomerModel();
                     customerModel.insertCust(req, resp);
                 }else if(action.equals("insertPro")){
-                    ProductModel productModel=new ProductModel();
-                    productModel.insertPro(req, resp);
+                    ProductModel pm = new ProductModel();
+                    pm.insertProduct(req,resp);
                 }else{
                     resp.sendRedirect("customerList.jsp");
                 }

@@ -1,4 +1,7 @@
-<%--
+
+<%@ page import="vn.edu.iuh.fit.week02.models.Product" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.iuh.fit.week02.services.ProductService" %><%--
   Created by IntelliJ IDEA.
   User: taejo
   Date: 9/27/2023
@@ -6,29 +9,48 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <html>
 <head>
     <title>Product List</title>
 </head>
 <body>
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Description</th>
-        <th>Manufacture</th>
-        <th>Name</th>
-        <th>Status</th>
-        <th>Unit</th>
-        <th colspan="2"><a href="insertProduct.jsp">Insert</a></th>
-    </tr>
-</table>
+<%
+    ProductService productServices =new ProductService();
+    List<Product> lst = productServices.getAllProduct();
+%>
+<div class="container">
+    <table class="table table-hove">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Unit</th>
+            <th>Manufacturer:</th>
+            <th>Status</th>
+            <th colspan="2"><a href="insertProduct.jsp">Insert</a> </th>
+        </tr>
+        <%for(Product product: lst){
+            long id =product.getProduct_id();
+            String delete_string = "controls?action=delete_product&id="+id;
+            String edit_string = "controls?action=edit_product&id="+id;
+        %>
+        <tr>
+            <td><%=id%></td>
+            <td><%=product.getName()%></td>
+            <td><%=product.getDescription()%></td>
+            <td><%=product.getUnit()%></td>
+            <td><%=product.getManufacturer()%></td>
+            <td><%=product.getStatus()%></td>
+            <td><a href=<%=edit_string%>>Update</a> </td>
+            <td><a href=<%=delete_string%>>Delete</a> </td>
+        </tr>
+        <%}%>
+    </table>
+</div>
 </body>
 </html>

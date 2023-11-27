@@ -2,8 +2,11 @@ package vn.edu.iuh.fit.week02.models;
 
 import jakarta.persistence.*;
 import vn.edu.iuh.fit.week02.enums.ProductStatus;
+import vn.edu.iuh.fit.week02.models.OrderDetail;
+import vn.edu.iuh.fit.week02.models.ProductImage;
+import vn.edu.iuh.fit.week02.models.ProductPrice;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,65 +16,52 @@ import java.util.List;
         @NamedQuery(name = "Product.findById", query = "select p from Product p where p.product_id = ?1")
         //,...1
 })
-public class Product implements Serializable {
+public class Product {
     @Id
-    @Column(name="ProductID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
     private long product_id;
-    @Column(name="Description",columnDefinition = "nvarchar(1000)")
-    private String description;
-    @Column(name="Manufacturer",columnDefinition = "nvarchar(100)")
-    private String manufacturer;
-    @Column(name="Name",columnDefinition = "nvarchar(100)")
+    @Column(name = "name", length = 150, nullable = false)
     private String name;
-    @Column(name="Status")
-    private ProductStatus status;
-    @Column(name="Unit",columnDefinition = "nvarchar(100)")
+
+    @Column(name = "description", length = 250, nullable = false)
+    private String description;
+    @Column(name = "unit", length = 25, nullable = false)
     private String unit;
-    public Product(long product_id, String description, String manufacturer, String name,ProductStatus status, String unit) {
-        this.product_id = product_id;
-        this.description = description;
-        this.manufacturer = manufacturer;
-        this.name = name;
-        this.status = status;
-        this.unit = unit;
-    }
-    public Product( String description, String manufacturer, String name,ProductStatus status, String unit) {
-        this.description = description;
-        this.manufacturer = manufacturer;
-        this.name = name;
-        this.status = status;
-        this.unit = unit;
-    }
+    @Column(name = "manufacturer_name", length = 100, nullable = false)
+    private String manufacturer;
+
+    @Column(name = "status")
+    private ProductStatus status;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<ProductImage> productImageList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<OrderDetail> orderDetails = new ArrayList<>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<ProductPrice> productPrices = new ArrayList<>();
 
     public Product() {
     }
 
-    public Product(long product_id) {
-        this.product_id = product_id;
+    public Product(String name, String description, String unit, String manufacturer, ProductStatus status) {
+        this.name = name;
+        this.description = description;
+        this.unit = unit;
+        this.manufacturer = manufacturer;
+        this.status = status;
     }
 
     public long getProduct_id() {
         return product_id;
     }
 
-    public void setProduct_id(long product_id) {
-        this.product_id = product_id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+    public void setProduct_id(long id) {
+        this.product_id = id;
     }
 
     public String getName() {
@@ -82,12 +72,12 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public ProductStatus getStatus() {
-        return status;
+    public String getDescription() {
+        return description;
     }
 
-    public void setStatus(ProductStatus status) {
-        this.status = status;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getUnit() {
@@ -98,15 +88,57 @@ public class Product implements Serializable {
         this.unit = unit;
     }
 
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public ProductStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ProductStatus status) {
+        this.status = status;
+    }
+
+    public List<ProductImage> getProductImageList() {
+        return productImageList;
+    }
+
+    public void setProductImageList(List<ProductImage> productImageList) {
+        this.productImageList = productImageList;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
+    public List<ProductPrice> getProductPrices() {
+        return productPrices;
+    }
+
+    public void setProductPrices(List<ProductPrice> productPrices) {
+        this.productPrices = productPrices;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
-                "product_id=" + product_id +
-                ", description='" + description + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
+                "id=" + product_id +
                 ", name='" + name + '\'' +
-                ", status=" + status +
+                ", description='" + description + '\'' +
                 ", unit='" + unit + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", status=" + status +
                 '}';
     }
+
+
 }

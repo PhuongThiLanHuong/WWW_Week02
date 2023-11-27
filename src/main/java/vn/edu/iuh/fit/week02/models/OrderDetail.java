@@ -2,56 +2,43 @@ package vn.edu.iuh.fit.week02.models;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
-
 @Entity
 @Table(name = "order_detail")
-public class OrderDetail implements Serializable{
-
-    @Column(name = "note", length = 255)
-    private String note;
-    @Column(name = "price", columnDefinition = "DOUBLE", nullable = false)
-    private double price;
-    @Column(name = "quantity", columnDefinition = "DOUBLE", nullable = false)
+public class OrderDetail {
+    @Column(name = "quantity", nullable = false)
     private double quantity;
+    @Column(name = "price", nullable = false)
+    private double price;
+    @Column(name = "note", length = 255, nullable = true)
+    private String note;
+
     @Id
     @ManyToOne
-    @JoinColumn(name = "OrderID", nullable = false)
+    @JoinColumn(name = "order_id")
     private Order order;
     @Id
+    @JoinColumn(name = "product_id")
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(Order order, Product product) {
+    public OrderDetail(double quantity, double price, String note, Order order, Product product) {
+        this.quantity = quantity;
+        this.price = price;
+        this.note = note;
         this.order = order;
         this.product = product;
     }
 
-    public OrderDetail(String note, double price, double quantity) {
-        this.note = note;
-        this.price = price;
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
-    }
-
-
-    public OrderDetail(Order order, Product product, String note, double price, double quantity) {
-        this.note = note;
-        this.price = price;
-        this.quantity = quantity;
-        this.order = order;
-        this.product = product;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
     }
 
     public double getPrice() {
@@ -62,12 +49,12 @@ public class OrderDetail implements Serializable{
         this.price = price;
     }
 
-    public double getQuantity() {
-        return quantity;
+    public String getNote() {
+        return note;
     }
 
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Order getOrder() {
@@ -89,9 +76,9 @@ public class OrderDetail implements Serializable{
     @Override
     public String toString() {
         return "OrderDetail{" +
-                "note='" + note + '\'' +
-                ", price=" + price +
                 ", quantity=" + quantity +
+                ", price=" + price +
+                ", note='" + note + '\'' +
                 ", order=" + order +
                 ", product=" + product +
                 '}';

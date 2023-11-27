@@ -6,32 +6,23 @@ import vn.edu.iuh.fit.week02.enums.ProductStatus;
 import vn.edu.iuh.fit.week02.models.Product;
 import vn.edu.iuh.fit.week02.services.ProductService;
 
-
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
 public class ProductModel {
-    private final ProductService productService=new ProductService();
-    public Object insertPro(HttpServletRequest request, HttpServletResponse response) throws IOException,InterruptedException{
-       String description=request.getParameter("Description");
-       String manufacture=request.getParameter("Manufacture");
-       String name=request.getParameter("Name");
-       String unit=request.getParameter("Unit");
-        Product product=new Product(description,manufacture,name, ProductStatus.ACTIVE,unit);
-        productService.addProduct(product);
-        return product;
+    private final ProductService productService =new ProductService();
+    public void insertProduct(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+        String name = req.getParameter("name");
+        String desc = req.getParameter("desc");
+        String unit = req.getParameter("unit");
+        String manu = req.getParameter("manu");
+        String status = req.getParameter("status");
+
+        Product product =new Product(name,desc,unit,manu, ProductStatus.valueOf(status));
+        productService.insert(product);
+        resp.sendRedirect("productList.jsp");
     }
-    public void Listing(HttpServletRequest request,HttpServletResponse response) throws Exception{
-        List<Product> list=productService.getAllProducts();
-        request.setAttribute("pro_list",list);
-        request.getRequestDispatcher("productList.jsp").forward(request,response);
-    }
-    public void deleteProduct(HttpServletRequest req,HttpServletResponse rep) throws Exception
-    {
-        long id=Long.parseLong(req.getParameter("id"));
-        productService.activateProduct(id,ProductStatus.IN_ACTIVE);
-        rep.sendRedirect("productList.jsp");
+
+    public void deleteProduct(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+        long id =Long.parseLong(req.getParameter("id"));
+        productService.updateStatus(id, ProductStatus.IN_ACTIVE);
+        resp.sendRedirect("productList.jsp");
     }
 }

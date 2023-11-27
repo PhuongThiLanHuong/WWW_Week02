@@ -12,7 +12,7 @@ public class TestConnection {
             EntityTransaction transaction = entityManager.getTransaction();
             try {
                 transaction.begin();
-                System.out.print("Connected Succesfully");
+                System.out.print("Connected Successfully");
                 transaction.commit();
             }
             catch (Exception e) {

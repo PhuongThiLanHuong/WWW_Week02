@@ -1,5 +1,6 @@
 package vn.edu.iuh.fit.week02.services;
 
+import jakarta.inject.Inject;
 import vn.edu.iuh.fit.week02.enums.ProductStatus;
 import vn.edu.iuh.fit.week02.models.Product;
 import vn.edu.iuh.fit.week02.repositories.ProductRepository;
@@ -7,34 +8,23 @@ import vn.edu.iuh.fit.week02.repositories.ProductRepository;
 import java.util.List;
 
 public class ProductService {
-    private ProductRepository productRepository;
-
+   @Inject
+    private ProductRepository repository;
+   @Inject
     public ProductService() {
-        productRepository=new ProductRepository();
-    }
-    public boolean addProduct(Product product){
-        if((product.getStatus()!= ProductStatus.ACTIVE)&&(product.getStatus()!=ProductStatus.IN_ACTIVE)&&(product.getStatus()!=ProductStatus.TERMINATED)) return false;
-        return productRepository.add(product);
-    }
-    public List<Product> getAllProducts() {
-        return productRepository.getAll();
+        this.repository = new ProductRepository();
     }
 
-    public Product getProductByID(long id) {
-        return productRepository.get(id);
-    }
-    public boolean updateProduct(Product product) {
-        if((product.getStatus()!= ProductStatus.ACTIVE)&&(product.getStatus()!=ProductStatus.IN_ACTIVE)&&(product.getStatus()!=ProductStatus.TERMINATED)) return false;
-        return productRepository.update(product);
-    }
-    public boolean deleteProduct(long id) {
-        return productRepository.detele(id);
+    public boolean insert(Product product){
+        return repository.add(product);
+
     }
 
-    public void activateProduct(long id,ProductStatus status) {
-        productRepository.updateStatus(id, status);
+    public List<Product>getAllProduct(){
+        return repository.getAll();
     }
 
-
-
+    public void updateStatus(long id, ProductStatus status) {
+        repository.updateStatus(id,status);
+    }
 }

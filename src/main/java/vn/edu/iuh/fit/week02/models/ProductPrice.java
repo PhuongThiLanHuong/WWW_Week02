@@ -2,30 +2,33 @@ package vn.edu.iuh.fit.week02.models;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "product_price")
-public class ProductPrice  implements Serializable {
+public class ProductPrice {
     @Id
+    @JoinColumn(name = "product_id")
     @ManyToOne
-    @JoinColumn(name = "ProductID", referencedColumnName = "ProductID")
     private Product product;
-
     @Id
     @Column(name = "price_date_time")
-    private Date priceDateTime;
-
-    @Column(name = "price")
+    private LocalDateTime price_date_time;
+    @Column(name = "price", nullable = false)
     private double price;
-
     @Column(name = "note")
     private String note;
 
-    public ProductPrice(){
-
+    public ProductPrice() {
     }
+
+    public ProductPrice(Product product, LocalDateTime price_date_time, double price, String note) {
+        this.product = product;
+        this.price_date_time = price_date_time;
+        this.price = price;
+        this.note = note;
+    }
+
     public Product getProduct() {
         return product;
     }
@@ -34,12 +37,12 @@ public class ProductPrice  implements Serializable {
         this.product = product;
     }
 
-    public Date getPriceDateTime() {
-        return priceDateTime;
+    public LocalDateTime getPrice_date_time() {
+        return price_date_time;
     }
 
-    public void setPriceDateTime(Date priceDateTime) {
-        this.priceDateTime = priceDateTime;
+    public void setPrice_date_time(LocalDateTime price_date_time) {
+        this.price_date_time = price_date_time;
     }
 
     public double getPrice() {
@@ -58,22 +61,13 @@ public class ProductPrice  implements Serializable {
         this.note = note;
     }
 
-    public ProductPrice(Product product, Date priceDateTime, double price, String note) {
-        this.product = product;
-        this.priceDateTime = priceDateTime;
-        this.price = price;
-        this.note = note;
-    }
     @Override
     public String toString() {
         return "ProductPrice{" +
                 "product=" + product +
-                ", priceDateTime=" + priceDateTime +
+                ", price_date_time=" + price_date_time +
                 ", price=" + price +
                 ", note='" + note + '\'' +
                 '}';
     }
-
-
 }
-

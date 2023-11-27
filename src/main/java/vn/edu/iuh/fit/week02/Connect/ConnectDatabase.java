@@ -3,9 +3,6 @@ package vn.edu.iuh.fit.week02.Connect;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-
-
-
 public class ConnectDatabase {
    private static ConnectDatabase instance;
     private EntityManagerFactory emf;

@@ -2,76 +2,71 @@ package vn.edu.iuh.fit.week02.models;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
 
 @Entity
-    @Table(name = "product_image")
-public class ProductImage implements Serializable {
-        @Id
-        @ManyToOne
-        @JoinColumn(name = "ProductID", referencedColumnName = "ProductID")
-        private Product product;
+@Table(name = "product_image")
+public class ProductImage {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "image_id")
+    private long image_id;
+    @Column(name = "path", length = 250, nullable = false)
+    private String path;
+    @Column(name = "alternative", length = 250)
+    private String alternative;
 
-        @Id
-        @Column(name = "image_id")
-        private String imageId;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-        @Column(name = "path", length = 255)
-        private String path;
+    public ProductImage() {
+    }
 
-        @Column(name = "alternative", length = 255)
-        private String alternative;
+    public ProductImage(String path, String alternative) {
+        this.path = path;
+        this.alternative = alternative;
+    }
 
-        public ProductImage() {
+    public long getImage_id() {
+        return image_id;
+    }
 
-        }
+    public void setImage_id(long image_id) {
+        this.image_id = image_id;
+    }
 
-        @Override
-        public String toString() {
-            return "ProductImage{" +
-                    "product=" + product +
-                    ", imageId='" + imageId + '\'' +
-                    ", path='" + path + '\'' +
-                    ", alternative='" + alternative + '\'' +
-                    '}';
-        }
 
-        public Product getProduct() {
-            return product;
-        }
+    public String getPath() {
+        return path;
+    }
 
-        public void setProduct(Product product) {
-            this.product = product;
-        }
+    public void setPath(String path) {
+        this.path = path;
+    }
 
-        public String getImageId() {
-            return imageId;
-        }
+    public String getAlternative() {
+        return alternative;
+    }
 
-        public void setImageId(String imageId) {
-            this.imageId = imageId;
-        }
+    public void setAlternative(String alternative) {
+        this.alternative = alternative;
+    }
 
-        public String getPath() {
-            return path;
-        }
+    public Product getProduct() {
+        return product;
+    }
 
-        public void setPath(String path) {
-            this.path = path;
-        }
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
-        public String getAlternative() {
-            return alternative;
-        }
-
-        public void setAlternative(String alternative) {
-            this.alternative = alternative;
-        }
-
-        public ProductImage(Product product, String imageId, String path, String alternative) {
-            this.product = product;
-            this.imageId = imageId;
-            this.path = path;
-            this.alternative = alternative;
-        }
+    @Override
+    public String toString() {
+        return "ProductImage{" +
+                "image_id=" + image_id +
+                ", path='" + path + '\'' +
+                ", alternative='" + alternative + '\'' +
+                ", product=" + product +
+                '}';
+    }
 }

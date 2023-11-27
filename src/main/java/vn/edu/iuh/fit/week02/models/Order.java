@@ -1,34 +1,34 @@
 package vn.edu.iuh.fit.week02.models;
 
-import jakarta.json.bind.annotation.JsonbDateFormat;
-import jakarta.persistence.*;
 
-import java.io.Serializable;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name="Orders")
+@Table(name = "orders")
 public class Order {
     @Id
-    @Column(name="OrderID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
     private long order_id;
-    @Column(name="OrderDate")
-    @JsonbDateFormat(value = "yyyy-MM-dd")
+
+    @Column(name = "order_date", nullable = false)
     private LocalDateTime orderDate;
 
     @ManyToOne
-    @JoinColumn(name="EmployeeID")
+    @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
+
     @ManyToOne
-    @JoinColumn(name="CustomerID")
+    @JoinColumn(name = "cust_id")
     private Customer customer;
 
-    public Order() {
-    }
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<OrderDetail> orderDetails;
 
-    public Order(long order_id) {
-        this.order_id = order_id;
+    public Order() {
     }
 
     public Order(long order_id, LocalDateTime orderDate, Employee employee, Customer customer) {
@@ -70,6 +70,14 @@ public class Order {
         this.customer = customer;
     }
 
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -77,6 +85,7 @@ public class Order {
                 ", orderDate=" + orderDate +
                 ", employee=" + employee +
                 ", customer=" + customer +
+                ", orderDetails=" + orderDetails +
                 '}';
     }
 }

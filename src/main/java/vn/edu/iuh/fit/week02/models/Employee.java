@@ -1,83 +1,73 @@
 package vn.edu.iuh.fit.week02.models;
 
-import jakarta.json.bind.annotation.JsonbDateFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import jakarta.persistence.*;
 import vn.edu.iuh.fit.week02.enums.EmployeeStatus;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "employee")
 @NamedQueries(
         @NamedQuery(name = "Employee.findAll", query = "select e from Employee e where e.status= ?1")
+//        ,@NamedQuery(name = "Employee.findXXXXXXX", query = "select e from Employee e where????")
+        //,...
 )
-public class Employee implements Serializable {
+public class Employee {
     @Id
-    @Column(name = "emp_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long emp_id;
-
-    @Column(name = "full_name", nullable = false)
-    private String full_name;
-
+    @Column(name = "emp_id")
+    private long id;
+    @Column(name = "full_name", length = 150, nullable = false)
+    private String fullname;
     @Column(name = "dob", nullable = false)
-    @JsonbDateFormat(value = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dob;
-
-    @Column(name = "email", length = 150, unique = true)
+    @Column(name = "email", unique = true, length = 150)
     private String email;
-
     @Column(name = "phone", length = 15, nullable = false)
     private String phone;
-
-    @Column(name = "address",length = 250, nullable = false)
+    @Column(name = "address", length = 250, nullable = false)
     private String address;
-
-    @Column(name = "status",nullable = false)
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private EmployeeStatus status;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private List<Order> listOrder;
+//    @JoinColumn
+    private List<Order> lstOrder;
 
-    public Employee(){
-
+    public Employee() {
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "emp_id=" + emp_id +
-                ", full_name='" + full_name + '\'' +
-                ", dob=" + dob +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", status=" + status +
-                ", listOrder=" + listOrder +
-                '}';
+    public Employee(String fullname, LocalDate dob, String email, String phone, String address, EmployeeStatus status) {
+        this.fullname = fullname;
+        this.dob = dob;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.status = status;
     }
 
-    public long getEmp_id() {
-        return emp_id;
+    public long getId() {
+        return id;
     }
 
-    public void setEmp_id(long emp_id) {
-        this.emp_id = emp_id;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
-    }
-
-    public void setEmp_id(Long emp_id) {
-        this.emp_id = emp_id;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public LocalDate getDob() {
@@ -120,30 +110,37 @@ public class Employee implements Serializable {
         this.status = status;
     }
 
-    public List<Order> getListOrder() {
-        return listOrder;
+    public List<Order> getLstOrder() {
+        return lstOrder;
     }
 
-    public void setListOrder(List<Order> listOrder) {
-        this.listOrder = listOrder;
+    public void setLstOrder(List<Order> lstOrder) {
+        this.lstOrder = lstOrder;
     }
 
-    public Employee(long emp_id, String full_name, LocalDate dob, String email, String phone, String address, EmployeeStatus status, List<Order> listOrder) {
-        this.emp_id = emp_id;
-        this.full_name = full_name;
-        this.dob = dob;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.status = status;
-        this.listOrder = listOrder;
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", fullname='" + fullname + '\'' +
+                ", dob=" + dob +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", status=" + status +
+                '}';
     }
-    public Employee( String full_name, LocalDate dob, String email, String phone, String address, EmployeeStatus status) {
-        this.full_name = full_name;
-        this.dob = dob;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.status = status;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee employee = (Employee) o;
+        return getId() == employee.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
