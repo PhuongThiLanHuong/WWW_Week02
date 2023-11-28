@@ -5,6 +5,7 @@ import vn.edu.iuh.fit.week02.models.OrderDetail;
 import vn.edu.iuh.fit.week02.repositories.OrderRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 public class OrderServices {
@@ -25,5 +26,9 @@ public class OrderServices {
     public Map<String,Long> getOrderByEmployeeForMonth(){
         return orderRepository.getOrderByEmployeeForMonth();
 
+    }
+    public List<Order> getAllOrder()
+    {
+        return orderRepository.getAllOrder();
     }
 }

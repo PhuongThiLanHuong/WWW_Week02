@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.iuh.fit.week02.model.CustomerModel;
 import vn.edu.iuh.fit.week02.model.EmployeeModel;
+import vn.edu.iuh.fit.week02.model.OrderModel;
 import vn.edu.iuh.fit.week02.model.ProductModel;
 
 import java.io.IOException;
@@ -54,6 +55,8 @@ public class ControlServlet extends HttpServlet {
                     resp.sendRedirect("productList.jsp");
                 }else if(action.equals("emp_list")) {
                     resp.sendRedirect("employeeList.jsp");
+                } else if (action.equals("order_list")) {
+                    resp.sendRedirect("orderList.jsp");
                 }else if(action.equals("delete_emp")){
                     EmployeeModel employeeModel=new EmployeeModel();
                     employeeModel.delteEmp(req,resp);
@@ -61,6 +64,11 @@ public class ControlServlet extends HttpServlet {
                     ProductModel pm=new ProductModel();
                     pm.deleteProduct(req, resp);
                 }
+                else if(action.equals("caclPrice")){
+                    OrderModel orderModel= new OrderModel();
+                    orderModel.calcPriceOfCart(req, resp);
+                }
+
                 else {
                     resp.sendRedirect("test.jsp");
                 }

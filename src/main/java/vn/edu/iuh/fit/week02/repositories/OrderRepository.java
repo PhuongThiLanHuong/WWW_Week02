@@ -34,9 +34,7 @@ public class OrderRepository {
         double price=0;
         tr.begin();
         try {
-            //thêm order
             em.merge(order);
-            //lấy thông tin giá của product để gán cho price của orderdetail
             String nativeQuery = "SELECT *\n" +
                     "FROM productprice \n" +
                     "WHERE productprice.ProductID =? \n" +
@@ -81,7 +79,7 @@ public class OrderRepository {
 
 
 
-    public List<Order> getAllEmployee(){
+    public List<Order> getAllOrder(){
         String sql = "select * from order";
         List<Order> list= em.createNativeQuery(sql, Order.class).getResultList();
         return list;
