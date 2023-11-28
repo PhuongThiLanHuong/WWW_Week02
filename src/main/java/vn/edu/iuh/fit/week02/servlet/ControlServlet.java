@@ -24,7 +24,7 @@ public class ControlServlet extends HttpServlet {
                 String action=actionObject.toString();
                 if(action.equals("insertEmp")){
                     EmployeeModel employeeModel=new EmployeeModel();
-                    employeeModel.insertEmp(req,resp);
+                    employeeModel.insertEmployee(req,resp);
                 }else if(action.equals("insertCust")){
                     CustomerModel customerModel=new CustomerModel();
                     customerModel.insertCust(req, resp);
