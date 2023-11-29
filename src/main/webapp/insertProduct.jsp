@@ -25,7 +25,7 @@
     </div>
     <div class="form-group">
         <label for="description">Description:</label>
-        <textarea class="form-control" id="description" name="description" required></textarea>
+        <textarea class="form-control" id="description" name="desc" required></textarea>
     </div>
     <div class="form-group">
         <label for="unit">Unit:</label>
@@ -33,15 +33,7 @@
     </div>
     <div class="form-group">
         <label for="manufacturerName">Manufacturer:</label>
-        <input type="text" class="form-control" id="manufacturerName" name="manufacturerName" required>
-    </div>
-    <div class="form-group">
-        <label for="status">Status:</label>
-        <select class="form-control" id="status" name="status" required>
-            <option value="1">ACTIVE</option>
-            <option value="0">IN_ACTIVE</option>
-            <option value="-1">TERMINATED</option>
-        </select>
+        <input type="text" class="form-control" id="manufacturerName" name="manu" required>
     </div>
     <input type="hidden" name="action" value="add">
     <button type="submit" class="btn btn-primary">Add product</button>

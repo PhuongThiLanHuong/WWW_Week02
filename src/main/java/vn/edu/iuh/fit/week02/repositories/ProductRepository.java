@@ -4,12 +4,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import vn.edu.iuh.fit.week02.enums.ProductStatus;
 import vn.edu.iuh.fit.week02.models.Product;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ProductRepository {
     private EntityManager em;
@@ -48,17 +47,9 @@ public class ProductRepository {
         }
         return false;
     }
-    public Product get(long id)
-    {
-        tr=em.getTransaction();
-        tr.begin();
-        try {
-            return em.find(Product.class,id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            tr.rollback();
-        }
-        return null;
+    public Optional<Product> findById(long id) {
+        Product rs = em.find(Product.class, id);
+        return rs == null ? Optional.empty() : Optional.of(rs);
     }
     public List<Product> getAll()
     {

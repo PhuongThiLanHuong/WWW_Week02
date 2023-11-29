@@ -4,6 +4,7 @@ import vn.edu.iuh.fit.week02.models.Customer;
 import vn.edu.iuh.fit.week02.repositories.CustomerRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CustomerService {
     private CustomerRepository customerRepository;
@@ -15,9 +16,9 @@ public class CustomerService {
     {
         return customerRepository.getAll();
     }
-    public Customer getCustomerById(long id)
+    public Optional<Customer> findById(long id)
     {
-        return customerRepository.get(id);
+        return customerRepository.findById(id);
     }
     public boolean addCustomer(Customer customer)
     {

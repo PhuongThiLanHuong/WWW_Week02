@@ -6,14 +6,11 @@ import vn.edu.iuh.fit.week02.models.Employee;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 
 public class EmployeeRepository {
     private EntityManager em;
     private EntityTransaction tr;
-    private Logger LoggerFactory;
-    private final Logger logger=LoggerFactory.getLogger(this.getClass().getName());
     public EmployeeRepository()
     {
         em= Persistence.createEntityManagerFactory("week02")
@@ -37,8 +34,9 @@ public class EmployeeRepository {
     public boolean update(Employee emp )
     {
         tr=em.getTransaction();
-        tr.begin();
+
         try {
+            tr.begin();
             em.merge(emp);
             tr.commit();
             return true;
@@ -48,23 +46,16 @@ public class EmployeeRepository {
         }
         return false;
     }
-    public Employee get(long id)
-    {
-       tr=em.getTransaction();
-        tr.begin();
-        try {
-            return em.find(Employee.class,id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            tr.rollback();
-        }
-        return null;
+    public Optional<Employee> findById(long id) {
+        Employee rs = em.find(Employee.class, id);
+        return rs == null ? Optional.empty() : Optional.of(rs);
     }
     public List<Employee> getAll()
     {
         tr=em.getTransaction();
-        tr.begin();
+
         try {
+            tr.begin();
             return em.createQuery("select c from Employee c", Employee.class)
                     .getResultList();
         } catch (Exception e) {

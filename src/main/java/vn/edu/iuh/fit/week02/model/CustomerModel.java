@@ -7,25 +7,25 @@ import vn.edu.iuh.fit.week02.services.CustomerService;
 
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class CustomerModel {
     private final CustomerService customerService=new CustomerService();
-    public Object insertCust(HttpServletRequest request, HttpServletResponse response) throws IOException,InterruptedException{
-        String name=request.getParameter("cust_name");
+    public void insertCust(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String name=request.getParameter("name");
         String email=request.getParameter("email");
         String phone=request.getParameter("phone");
         String address=request.getParameter("address");
         Customer customer=new Customer(name,email,phone,address);
         customerService.addCustomer(customer);
-        return customer;
-
+        response.sendRedirect("customerList.jsp");
     }
-    public void Listing(HttpServletRequest request,HttpServletResponse response) throws Exception{
-        List<Customer> list=customerService.getAllCustomer();
-        request.setAttribute("cus_list",list);
-        request.getRequestDispatcher("customerList.jsp").forward(request,response);
+    public void updateCustomer(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+       Customer customer=new Customer(name,email,phone,address);
+       customerService.updateCustomer(customer);
+       response.sendRedirect("customerList.jsp");
     }
 }

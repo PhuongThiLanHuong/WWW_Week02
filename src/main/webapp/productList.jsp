@@ -37,7 +37,7 @@
         <%for(Product product: lst){
             long id =product.getProduct_id();
             String delete_string = "controls?action=delete_product&id="+id;
-            String edit_string = "controls?action=edit_product&id="+id;
+            String edit_string = "updateProduct.jsp?id="+id;
         %>
         <tr>
             <td><%=id%></td>

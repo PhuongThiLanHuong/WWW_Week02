@@ -39,14 +39,6 @@
         <label for="address">Address:</label>
         <input type="text" class="form-control" id="address" name="address" required>
     </div>
-    <div class="form-group">
-        <label for="status">Status:</label>
-        <select class="form-control" id="status" name="status" required>
-            <option value="1">ACTIVE</option>
-            <option value="0">IN_ACTIVE</option>
-            <option value="-1">TERMINATED</option>
-        </select>
-    </div>
     <input type="hidden" name="action" value="add">
     <button type="submit" class="btn btn-primary">Add employee</button>
 </form>

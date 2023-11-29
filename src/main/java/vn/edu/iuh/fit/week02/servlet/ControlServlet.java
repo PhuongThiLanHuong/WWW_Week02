@@ -16,29 +16,29 @@ import java.io.IOException;
 public class ControlServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try
-        {
-            Object actionObject=req.getParameter("action");
-            if(actionObject!=null)
-            {
-                String action=actionObject.toString();
-                if(action.equals("insertEmp")){
-                    EmployeeModel employeeModel=new EmployeeModel();
-                    employeeModel.insertEmployee(req,resp);
-                }else if(action.equals("insertCust")){
-                    CustomerModel customerModel=new CustomerModel();
-                    customerModel.insertCust(req, resp);
-                }else if(action.equals("insertPro")){
-                    ProductModel pm = new ProductModel();
-                    pm.insertProduct(req,resp);
-                }else{
-                    resp.sendRedirect("customerList.jsp");
+        try {
+            ProductModel productModel = new ProductModel();
+            CustomerModel customerModel = new CustomerModel();
+            EmployeeModel employeeModel = new EmployeeModel();
+            Object action = req.getParameter("action");
+            if (action.equals("insertEmp")) {
+                employeeModel.insertEmp(req, resp);
+            } else if (action.equals("insertCust")) {
+                customerModel.insertCust(req,resp);
+            } else if (action.equals("insertPro")) {
+                productModel.insertProduct(req,resp);
+            } else if (action.equals("updatePro")) {
+                productModel.updateProduct(req, resp);
+            } else if (action.equals("updateCust")) {
+                customerModel.updateCustomer(req,resp);
+            } else if (action.equals("updateEmp")) {
+               employeeModel.updateEmployee(req,resp);
+            }else {
+                    resp.sendRedirect("index.jsp");
                 }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        }catch (Exception e)
-        {
-            throw  new RuntimeException();
-        }
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ControlServlet extends HttpServlet {
                     resp.sendRedirect("orderList.jsp");
                 }else if(action.equals("delete_emp")){
                     EmployeeModel employeeModel=new EmployeeModel();
-                    employeeModel.delteEmp(req,resp);
+                    employeeModel.deleteEmp(req,resp);
                 }else if (action.equals("delete_product")){
                     ProductModel pm=new ProductModel();
                     pm.deleteProduct(req, resp);

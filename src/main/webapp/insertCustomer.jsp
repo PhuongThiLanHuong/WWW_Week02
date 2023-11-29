@@ -18,7 +18,7 @@
 </head>
 <body>
 <h2>Insert new customer</h2>
-<form action="controls?action=insertPro" method="post">
+<form action="controls?action=insertCust" method="post">
     <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" class="form-control" id="name" name="name" required>

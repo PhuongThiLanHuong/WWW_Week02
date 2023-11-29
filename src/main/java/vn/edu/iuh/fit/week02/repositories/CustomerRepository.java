@@ -7,13 +7,11 @@ import vn.edu.iuh.fit.week02.models.Customer;
 
 
 import java.util.List;
-import java.util.logging.Logger;
+import java.util.Optional;
 
 public class CustomerRepository {
     private EntityManager em;
     private EntityTransaction tr;
-    private Logger LoggerFactory;
-    private final Logger logger=LoggerFactory.getLogger(this.getClass().getName());
     public CustomerRepository()
     {
         em= Persistence.createEntityManagerFactory("week02")
@@ -64,17 +62,9 @@ public class CustomerRepository {
         }
         return  false;
     }
-    public Customer get(long id)
-    {
-        tr=em.getTransaction();
-        tr.begin();
-        try {
-            return em.find(Customer.class,id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            tr.rollback();
-        }
-        return null;
+    public Optional<Customer> findById(long id) {
+       Customer rs = em.find(Customer.class, id);
+        return rs == null ? Optional.empty() : Optional.of(rs);
     }
     public List<Customer> getAll()
     {

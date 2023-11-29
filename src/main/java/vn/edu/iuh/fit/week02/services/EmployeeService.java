@@ -5,6 +5,7 @@ import vn.edu.iuh.fit.week02.models.Employee;
 import vn.edu.iuh.fit.week02.repositories.EmployeeRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class EmployeeService {
     private EmployeeRepository repository;
@@ -15,12 +16,12 @@ public class EmployeeService {
         return repository.getAll();
     }
 
-    public Employee getEmployeeById(long id) {
-        return repository.get(id);
+    public Optional<Employee> findById(long id)
+    {
+        return repository.findById(id);
     }
 
-    public boolean addEmployee(Employee employee) {
-        if((employee.getStatus()!=EmployeeStatus.ACTIVE)&&(employee.getStatus()!=EmployeeStatus.IN_ACTIVE)&&(employee.getStatus()!=EmployeeStatus.TERMINATED)) return false;
+    public boolean insertEmp(Employee employee) {
         return repository.add(employee);
     }
 

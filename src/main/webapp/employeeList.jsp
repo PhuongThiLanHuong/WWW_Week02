@@ -35,9 +35,12 @@
             <th>Status</th>
             <th colspan="2"><a href="insertEmployee.jsp">Insert</a></th>
         </tr>
-        </thead>
+            <%for(Employee employee:list){
+            long id =employee.getId();
+            String delete_string = "controls?action=delete_employee&id="+id;
+            String edit_string = "updateEmployee.jsp?id="+id;
+        %>
         <tr>
-            <%for(Employee employee:list){%>
             <td><%=employee.getId()%></td>
             <td><%=employee.getFullname()%></td>
             <td><%=employee.getDob()%></td>
@@ -45,8 +48,8 @@
             <td><%=employee.getPhone()%></td>
             <td><%=employee.getAddress()%></td>
             <td><%=employee.getStatus()%></td>
-            <td><a href="controls?actiion=uodate_emp">Update</a> </td>
-            <td><a href="controls?action=delete_emp&id=<%employee.getId();%>">Delete</a></td>
+            <td><a href=<%=edit_string%>>Update</a> </td>
+            <td><a href=<%=delete_string%>>Delete</a> </td>
 
         </tr>
         <%}%>

@@ -32,15 +32,19 @@
             <th>Address</th>
             <th colspan="2"><a href="insertCustomer.jsp">Insert</a></th>
         </tr>
-        <%for(Customer customer:list){%>
+        <%for(Customer customer:list){
+          long id=customer.getId();
+            String delete_string = "controls?action=delete_customer&id="+id;
+            String edit_string = "updateCustomer.jsp?id="+id;
+        %>
         <tr>
             <td><%=customer.getId()%></td>
             <td><%=customer.getName()%></td>
             <td><%=customer.getEmail()%></td>
             <td><%=customer.getPhone()%></td>
             <td><%=customer.getAddress()%></td>
-            <td><a href="controls?actiion=uodate_cust">Update</a> </td>
-            <td><a href="controls?action=delete_cust&id=<%customer.getId();%>">Delete</a></td>
+            <td><a href=<%=edit_string%>>Update</a> </td>
+            <td><a href=<%=delete_string%>>Delete</a> </td>
         </tr>
         <%}%>
     </table>
