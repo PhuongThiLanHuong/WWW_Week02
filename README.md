@@ -1,4 +1,7 @@
 # WWW_Week02
+*Trang index:
+![image](https://github.com/PhuongThiLanHuong/WWW_Week02/assets/125435868/d8ab1029-14ed-4f3f-a88a-2cdf90f9deea)
+
 *Customer:
 -List:
 ![image](https://github.com/PhuongThiLanHuong/WWW_Week02/assets/125435868/c842e1c6-7e28-4f04-a5f7-343cc03bdbc5)
@@ -20,6 +23,9 @@
 ![image](https://github.com/PhuongThiLanHuong/WWW_Week02/assets/125435868/edb479af-0d45-4293-a587-b2d8f33ec45e)
 -Update:
 ![image](https://github.com/PhuongThiLanHuong/WWW_Week02/assets/125435868/a89d9a90-43b3-466d-acfa-7d2b017bb402)
+*Order:
+-List:
+![image](https://github.com/PhuongThiLanHuong/WWW_Week02/assets/125435868/9dec8f96-1ffe-49a0-bbe8-98913e43a247)
 
 
 
