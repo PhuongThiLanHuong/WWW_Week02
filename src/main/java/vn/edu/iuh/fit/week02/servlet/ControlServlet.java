@@ -70,7 +70,7 @@ public class ControlServlet extends HttpServlet {
                 }
 
                 else {
-                    resp.sendRedirect("test.jsp");
+                    resp.sendRedirect("index.jsp");
                 }
             }
         }catch (Exception e)

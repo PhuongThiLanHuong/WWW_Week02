@@ -15,19 +15,12 @@ public class EmployeeService {
     public List<Employee> getAllEmployees() {
         return repository.getAll();
     }
-
-    public Optional<Employee> findById(long id)
-    {
-        return repository.findById(id);
-    }
-
     public boolean insertEmp(Employee employee) {
         return repository.add(employee);
     }
 
     public boolean updateEmployee(Employee employee) {
-        if((employee.getStatus()!=EmployeeStatus.ACTIVE)&&(employee.getStatus()!=EmployeeStatus.IN_ACTIVE)&&(employee.getStatus()!=EmployeeStatus.TERMINATED)) return false;
-        return repository.update(employee);
+       return repository.update(employee);
     }
 
     public boolean deleteEmployee(long id) {
@@ -37,5 +30,7 @@ public class EmployeeService {
     public boolean activateEmployee(long id) {
         return repository.activeEmp(id);
     }
-
+    public Optional<Employee> getEmployeeById(long id) {
+        return repository.findById(id);
+    }
 }

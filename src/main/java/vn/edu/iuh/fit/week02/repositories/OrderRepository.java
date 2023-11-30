@@ -19,8 +19,6 @@ import java.util.logging.Logger;
 public class OrderRepository {
     private EntityManager em;
     private EntityTransaction transaction;
-    private Logger LoggerFactory;
-    private final Logger logger=LoggerFactory.getLogger(this.getClass().getName());
     public OrderRepository()
     {
         em= Persistence.createEntityManagerFactory("week02")
@@ -71,7 +69,7 @@ public class OrderRepository {
         }
     }
     public Optional<Order> findbyId(Long id) {
-        TypedQuery<Order> query = em.createQuery("select o from Orders o where o.OrderID=:id", Order.class);
+        TypedQuery<Order> query = em.createQuery("select o from Order o where o.order_id=:id", Order.class);
         query.setParameter("id", id);
         Order order = query.getSingleResult();
         return order == null ? Optional.empty() : Optional.of(order);

@@ -32,7 +32,7 @@ public class ProductModel {
         String name = request.getParameter("name");
         String unit = request.getParameter("unit");
         Product product = new Product(name,dec,unit,manufacturer,ProductStatus.ACTIVE);
-        productService.update(product);
+       productService.update(product);
         response.sendRedirect("productList.jsp");
     }
 }

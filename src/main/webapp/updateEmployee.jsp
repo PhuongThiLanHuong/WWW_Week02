@@ -33,7 +33,7 @@
                 EmployeeService employeeService=new EmployeeService();
                 long id = Long.parseLong(request.getParameter("id"));
                 System.out.println(id);
-                Optional<Employee> optional = employeeService.findById(id);
+                Optional<Employee> optional = employeeService.getEmployeeById(id);
                 Employee employee = optional.orElseThrow(IllegalAccessError::new);
             %>
             <form action="controls?action=updateEmp" method="post">
