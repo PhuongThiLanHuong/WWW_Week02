@@ -20,6 +20,7 @@ public class ControlServlet extends HttpServlet {
             ProductModel productModel = new ProductModel();
             CustomerModel customerModel = new CustomerModel();
             EmployeeModel employeeModel = new EmployeeModel();
+            OrderModel orderModel=new OrderModel();
             Object action = req.getParameter("action");
             if (action.equals("insertEmp")) {
                 employeeModel.insertEmp(req, resp);
@@ -61,6 +62,9 @@ public class ControlServlet extends HttpServlet {
                     EmployeeModel employeeModel=new EmployeeModel();
                     employeeModel.deleteEmp(req,resp);
                 }else if (action.equals("delete_product")){
+                    ProductModel pm=new ProductModel();
+                    pm.deleteProduct(req, resp);
+                }else if (action.equals("delete_cus")){
                     ProductModel pm=new ProductModel();
                     pm.deleteProduct(req, resp);
                 }

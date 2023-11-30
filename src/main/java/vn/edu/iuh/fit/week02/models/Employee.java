@@ -54,6 +54,10 @@ public class Employee {
         this.status = status;
     }
 
+    public Employee(long id) {
+        this.id = id;
+    }
+
     public long getId() {
         return id;
     }

@@ -34,7 +34,6 @@
         </tr>
         <%for(Customer customer:list){
           long id=customer.getId();
-            String delete_string = "controls?action=delete_customer&id="+id;
             String edit_string = "updateCustomer.jsp?id="+id;
         %>
         <tr>
@@ -44,7 +43,6 @@
             <td><%=customer.getPhone()%></td>
             <td><%=customer.getAddress()%></td>
             <td><a href=<%=edit_string%>>Update</a> </td>
-            <td><a href=<%=delete_string%>>Delete</a> </td>
         </tr>
         <%}%>
     </table>

@@ -20,7 +20,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="card-header-my-3">All Order</div>
+    <h2>Order List</h2>
     <table class="table table-hover">
         <thead class="table-header">
         <tr>
@@ -28,6 +28,7 @@
             <th scope="col">Price</th>
             <th scope="col">Customer</th>
             <th scope="col">Employee</th>
+            <th colspan="2"><a href="insertOrder.jsp">Insert</a> </th>
         </tr>
         </thead>
         <tbody>
@@ -46,6 +47,7 @@
             </td>
             <td><%=o.getEmployee().getFullname() %>
             </td>
+
         </tr>
         <%
                 }

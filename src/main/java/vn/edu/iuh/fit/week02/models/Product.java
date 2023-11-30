@@ -56,6 +56,10 @@ public class Product {
         this.status = status;
     }
 
+    public Product(long product_id) {
+        this.product_id = product_id;
+    }
+
     public long getProduct_id() {
         return product_id;
     }
