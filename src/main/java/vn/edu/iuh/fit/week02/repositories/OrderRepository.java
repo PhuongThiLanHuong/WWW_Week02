@@ -77,10 +77,8 @@ public class OrderRepository {
 
 
 
-    public List<Order> getAllOrder(){
-        String sql = "select * from order";
-        List<Order> list= em.createNativeQuery(sql, Order.class).getResultList();
-        return list;
+    public List<Order> getAll(){
+        return em.createNamedQuery("Order.findAll",Order.class).getResultList();
     }
     public Map<LocalDateTime,Long> getOrderByDate(){
         Map<LocalDateTime,Long> map= new HashMap<>();

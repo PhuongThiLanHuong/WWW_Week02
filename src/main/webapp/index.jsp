@@ -14,5 +14,6 @@
 <a href="controls?action=emp_list">Employee List</a><br/>
 <a href="controls?action=cust_list">Customer List</a><br/>
 <a href="controls?action=pro_list">Product List</a><br/>
+<a href="controls?action=order_list">Order List</a><br/>
 </body>
 </html>

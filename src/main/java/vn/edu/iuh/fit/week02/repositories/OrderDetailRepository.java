@@ -21,8 +21,8 @@ public class OrderDetailRepository {
         transaction.begin();
         try {
             String nativeQuery= "SELECT * \n" +
-                    "FROM orderdetail\n" +
-                    "WHERE OrderID=?";
+                    "FROM order_detail\n" +
+                    "WHERE order_id=?";
             Query query = em.createNativeQuery(nativeQuery, OrderDetail.class);
             query.setParameter(1, orderID);
             list=query.getResultList();
@@ -46,8 +46,8 @@ public class OrderDetailRepository {
         transaction.begin();
         try {
             String nativeQuery= "SELECT * \n" +
-                    "FROM orderdetail\n" +
-                    "WHERE OrderID=?";
+                    "FROM order_detail\n" +
+                    "WHERE order_id=?";
             Query query = em.createNativeQuery(nativeQuery, OrderDetail.class);
             query.setParameter(1, orderID);
             list=query.getResultList();
